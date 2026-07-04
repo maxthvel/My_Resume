@@ -1,0 +1,41 @@
+---
+title: "Cutting page load by 80%: a profiling story, not a tricks list"
+description: "The exact sequence — measure, split, defer, cache — that took a production React marketplace from sluggish to instant."
+date: "2026-01-15"
+tags: ["Performance", "React", "Frontend"]
+---
+
+"Make it faster" is not a plan. Here's the sequence that actually cut load time 80% on a production service marketplace.
+
+## 1. Measure before touching anything
+
+Bundle analysis showed one monolithic chunk: the landing page was downloading the admin dashboard, the booking flow, and a charting library the user might never see. The network tab showed the same API endpoints called repeatedly across navigations.
+
+Two problems. Neither is fixed by `React.memo`.
+
+## 2. Split along user intent, not file structure
+
+Route-level code-splitting with `React.lazy` meant users download the booking flow *when they book*:
+
+```tsx
+const BookingFlow = lazy(() => import("./routes/BookingFlow"));
+```
+
+The landing chunk dropped to a fraction of its size. This was the single biggest win.
+
+## 3. Cache responses where the user feels it
+
+Repeat navigations were re-fetching identical data. A thin caching layer in the Zustand store — keyed by endpoint, invalidated on mutation — made back-navigation instant:
+
+```ts
+const cached = cache.get(key);
+if (cached && !isStale(cached)) return cached.data;
+```
+
+## 4. Only then, micro-optimise
+
+`React.memo` and selective store subscriptions cleaned up re-renders — worthwhile, but tens of milliseconds, not seconds. If you start here, you're optimising the wrong end.
+
+## The order matters
+
+Split → cache → memoise. Each step's impact was measured against the previous baseline. That's how you get to numbers like 80% — and know they're real.

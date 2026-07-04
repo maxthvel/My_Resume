@@ -1,0 +1,41 @@
+---
+title: "The JWT refresh bug that only appears in production"
+description: "Why rotating refresh tokens break under concurrent requests, and the promise-queue pattern that fixes it."
+date: "2026-05-12"
+tags: ["Auth", "Node.js", "Architecture"]
+---
+
+Rotating refresh tokens are a security best practice — until your users are on flaky networks and your frontend fires six parallel requests with an expired access token.
+
+## The failure mode
+
+Each 401 triggers a refresh. The first refresh succeeds and **rotates** the token. The other five refreshes now carry a token that was just invalidated. Depending on your backend, that looks like token theft — so you revoke the session. Your user, standing on a construction site with two bars of signal, is logged out. Again.
+
+The bug never appears in dev: localhost is fast enough that requests rarely overlap an expiry window.
+
+## The fix: a single-flight refresh queue
+
+The interceptor needs one invariant: **at most one refresh in flight, ever**.
+
+```ts
+let refreshPromise: Promise<string> | null = null;
+
+async function getFreshToken(): Promise<string> {
+  if (!refreshPromise) {
+    refreshPromise = doRefresh().finally(() => {
+      refreshPromise = null;
+    });
+  }
+  return refreshPromise;
+}
+```
+
+The first 401 creates the promise. Every concurrent 401 awaits the *same* promise. When it resolves, all pending requests retry with the new token. One rotation, zero revocations.
+
+## What I'd check in your codebase
+
+1. Does your interceptor deduplicate refresh calls, or just fire them?
+2. Does the backend allow a grace window for the previous refresh token, or hard-revoke?
+3. Do you have a test that fires 10 parallel requests with an expired token? If not, you have this bug — you just haven't met it yet.
+
+I shipped this pattern in a production ERP serving four user roles. Session complaints went to zero.

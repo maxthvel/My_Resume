@@ -1,0 +1,35 @@
+---
+title: "Make illegal states unrepresentable: procurement as a state machine"
+description: "How modelling MRN → PO → delivery → inventory as an explicit state machine eliminated a whole class of financial bugs."
+date: "2026-03-28"
+tags: ["System Design", "TypeScript", "Backend"]
+---
+
+The scariest bugs in an ERP aren't crashes. They're *silent* ones: a purchase order edited after approval, a delivery recorded against a cancelled PO. Nothing throws. The books are just wrong.
+
+## Booleans are how you get hurt
+
+The naive model is a row with flags: `isApproved`, `isDelivered`, `isCancelled`. Eight combinations, most of them meaningless. `isDelivered && isCancelled` — what does that even mean? Your code has to defend against it everywhere, and one missed check corrupts financial data.
+
+## One column, explicit transitions
+
+```ts
+type POState = "draft" | "submitted" | "approved" | "delivered" | "closed" | "cancelled";
+
+const transitions: Record<POState, POState[]> = {
+  draft:     ["submitted", "cancelled"],
+  submitted: ["approved", "cancelled"],
+  approved:  ["delivered", "cancelled"],
+  delivered: ["closed"],
+  closed:    [],
+  cancelled: [],
+};
+```
+
+Every mutation goes through one function that checks the transition table, writes an immutable audit row, and applies role rules (a site engineer can submit an MRN; only an admin approves the PO — and never their own).
+
+## What this bought us
+
+Edits after approval became **impossible by construction**, not by discipline. The audit trail became the source of truth for reconciliation. And when finance asked "who changed this and when?", the answer was one query, not an investigation.
+
+State machines aren't academic. They're the cheapest insurance a backend can buy.
