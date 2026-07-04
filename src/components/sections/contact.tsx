@@ -21,7 +21,7 @@ export function Contact() {
     <section id="contact" className="relative scroll-mt-24 overflow-hidden border-t border-border">
       <div
         className="absolute left-1/2 top-1/2 -z-10 h-[400px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-15 blur-[100px]"
-        style={{ background: "radial-gradient(closest-side, hsl(210 100% 55%), transparent)" }}
+        style={{ background: "radial-gradient(closest-side, hsl(var(--accent)), transparent)" }}
         aria-hidden
       />
       <div className="mx-auto max-w-6xl px-5 py-28 text-center md:px-8 md:py-36">

@@ -59,7 +59,7 @@ export function CommandPalette({ open, setOpen }: { open: boolean; setOpen: (v: 
         </Command.Group>
 
         <Command.Group heading="Actions" className="px-1 py-1 text-xs uppercase tracking-wider text-subtle [&_[cmdk-group-items]]:mt-1">
-          <Item onSelect={() => go(site.resumeUrl)} icon={<FileText />}>Download résumé</Item>
+          <Item onSelect={() => go(site.resumeUrl)} icon={<FileText />}>Download Resume</Item>
           <Item onSelect={() => go(site.github)} icon={<Github />}>GitHub</Item>
           <Item onSelect={() => go(`mailto:${site.email}`)} icon={<Mail />}>Email me</Item>
         </Command.Group>

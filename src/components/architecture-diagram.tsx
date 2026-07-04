@@ -4,10 +4,10 @@ import { motion, useReducedMotion } from "framer-motion";
 import type { ArchEdge, ArchNode } from "@/lib/data/projects";
 
 const accentColor: Record<string, string> = {
-  blue: "hsl(210 100% 66%)",
-  violet: "hsl(258 90% 70%)",
-  emerald: "hsl(160 84% 45%)",
-  amber: "hsl(38 92% 55%)",
+  blue: "hsl(var(--accent))",
+  violet: "hsl(var(--accent-violet))",
+  emerald: "hsl(var(--accent-emerald))",
+  amber: "hsl(var(--accent-amber))",
 };
 
 const W = 150;
@@ -44,7 +44,7 @@ export function ArchitectureDiagram({ nodes, edges, title }: { nodes: ArchNode[]
               <motion.path
                 d={d}
                 fill="none"
-                stroke="hsl(240 5% 26%)"
+                stroke="hsl(var(--border-strong))"
                 strokeWidth="1.5"
                 initial={reduce ? undefined : { pathLength: 0 }}
                 whileInView={{ pathLength: 1 }}
@@ -74,17 +74,17 @@ export function ArchitectureDiagram({ nodes, edges, title }: { nodes: ArchNode[]
           >
             <rect
               x={n.x} y={n.y} width={W} height={H} rx="8"
-              fill="hsl(240 5% 7%)"
+              fill="hsl(var(--surface))"
               stroke={accentColor[n.accent ?? "blue"]}
               strokeOpacity="0.45"
               strokeWidth="1"
             />
             <circle cx={n.x + 14} cy={n.y + (n.sub ? 20 : H / 2)} r="3" fill={accentColor[n.accent ?? "blue"]} />
-            <text x={n.x + 26} y={n.y + (n.sub ? 24 : H / 2 + 4)} fill="hsl(0 0% 92%)" fontSize="12" fontWeight="600" fontFamily="var(--font-mono)">
+            <text x={n.x + 26} y={n.y + (n.sub ? 24 : H / 2 + 4)} fill="hsl(var(--foreground))" fontSize="12" fontWeight="600" fontFamily="var(--font-mono)">
               {n.label}
             </text>
             {n.sub && (
-              <text x={n.x + 26} y={n.y + 40} fill="hsl(240 4% 55%)" fontSize="10" fontFamily="var(--font-mono)">
+              <text x={n.x + 26} y={n.y + 40} fill="hsl(var(--subtle))" fontSize="10" fontFamily="var(--font-mono)">
                 {n.sub}
               </text>
             )}

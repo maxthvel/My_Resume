@@ -23,7 +23,7 @@ export function Hero() {
       <div className="dot-grid absolute inset-0 -z-10" aria-hidden />
       <div
         className="absolute left-1/2 top-0 -z-10 h-[500px] w-[800px] -translate-x-1/2 rounded-full opacity-25 blur-[120px]"
-        style={{ background: "radial-gradient(closest-side, hsl(210 100% 50%), hsl(258 90% 50% / 0.5), transparent)" }}
+        style={{ background: "radial-gradient(closest-side, hsl(var(--accent)), hsl(var(--accent-violet) / 0.5), transparent)" }}
         aria-hidden
       />
 
@@ -36,19 +36,19 @@ export function Hero() {
         {/* Availability */}
         <motion.div variants={item} className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-border bg-surface/80 px-4 py-1.5 backdrop-blur">
           <span className="relative flex h-2 w-2">
-            <span className="absolute h-full w-full animate-pulse-dot rounded-full bg-accent-emerald" />
+            <span className="absolute h-full w-full rounded-full bg-accent-emerald" />
           </span>
           <span className="text-sm text-muted">{site.availabilityLabel}</span>
         </motion.div>
 
-        <motion.h1 variants={item} className="max-w-4xl text-display-lg font-semibold">
+        <motion.h1 variants={item} className="max-w-2xl text-display-lg font-semibold">
           <span className="text-gradient">I build production systems</span>
           <br />
           <span className="text-gradient-accent">that scale past the demo.</span>
         </motion.h1>
 
         <motion.p variants={item} className="mt-6 max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
-          Full stack product engineer — 3+ years shipping MERN systems that real businesses run on:
+          Full Stack Engineer — 3+ years shipping MERN systems that real businesses run on:
           a 50-endpoint ERP backend, race-condition-safe auth, and frontends that cut load times by 80%.
           Now building AI-native features on top of that foundation.
         </motion.p>
@@ -61,7 +61,7 @@ export function Hero() {
           </Link>
           <Link href={site.resumeUrl} target="_blank">
             <Button variant="secondary" size="lg">
-              <FileText className="h-4 w-4" aria-hidden /> Résumé
+              <FileText className="h-4 w-4" aria-hidden /> Resume
             </Button>
           </Link>
           <div className="ml-1 flex items-center gap-1">

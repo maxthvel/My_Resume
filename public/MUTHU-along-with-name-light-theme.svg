@@ -1,0 +1,17 @@
+<svg width="1120" height="320" viewBox="0 0 1120 320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="mv" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2F7DE1"/>
+      <stop offset="100%" stop-color="#7C5CE0"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(32,32) scale(0.5)">
+    <rect x="16" y="16" width="480" height="480" rx="112" fill="#0A0A0B"/>
+    <path d="M 148 356 L 148 156" stroke="#F2F2F3" stroke-width="44" stroke-linecap="round" fill="none"/>
+    <path d="M 364 356 L 364 156" stroke="#F2F2F3" stroke-width="44" stroke-linecap="round" fill="none"/>
+    <path d="M 148 156 L 256 300 L 364 156" stroke="url(#mv)" stroke-width="44" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <circle cx="256" cy="368" r="22" fill="url(#mv)"/>
+  </g>
+  <text x="332" y="172" font-family="Inter, 'Segoe UI', -apple-system, sans-serif" font-size="96" font-weight="650" letter-spacing="-2" fill="#17171B">MUTHU VEL</text>
+  <text x="332" y="236" font-family="'JetBrains Mono', Consolas, monospace" font-size="34" letter-spacing="6" fill="#6E6E78">FULL STACK AI ENGINEER</text>
+</svg>

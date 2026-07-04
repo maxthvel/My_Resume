@@ -1,11 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/data/site";
 import { Shell } from "@/components/shell";
 import { Footer } from "@/components/footer";
 import { ChatWidget } from "@/components/chat-widget";
-
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-sans",
+  display: "swap",
+});
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
 
@@ -32,6 +37,9 @@ export const metadata: Metadata = {
     description: site.tagline,
   },
   robots: { index: true, follow: true },
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export const viewport: Viewport = {
@@ -53,7 +61,7 @@ const personJsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`dark ${inter.variable} ${mono.variable}`}>
+    <html lang="en" className={`dark ${poppins.variable} ${mono.variable}`}>
       <body className="font-sans">
         <script
           type="application/ld+json"

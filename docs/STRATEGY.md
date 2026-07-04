@@ -11,14 +11,14 @@ The thinking behind the site: positioning, design system, copy, and the roadmap 
 - You have **numbers**: -80% load time, -20% bug reports, 0 design defects, 4 RBAC roles.
 
 **Positioning statement (used across site, resume, LinkedIn):**
-> Full stack product engineer who builds production systems that scale past the demo — and is now building AI-native features on that foundation.
+> Full Stack Engineer who builds production systems that scale past the demo — and is now building AI-native features on that foundation.
 
 The AI angle is deliberately framed as *"AI on top of production engineering"*, not *"AI enthusiast."* AI startups are drowning in prompt-tinkerers; they're starving for engineers who can put an LLM behind RBAC, validation, and an audit trail. The AI Lab's closing line — *"LLM output is a proposal, never a mutation"* — is a senior-engineer signal worth more than any framework list.
 
 ## 2. Resume positioning strategy
 
 - Lead with the ERP backend, not the frontend work — architecture ownership is the scarce signal at 3 YOE.
-- Rename the title to **"Full Stack Product Engineer"**; drop "Front End Development React" from the header (it undersells).
+- Rename the title to **"Full Stack Engineer"**; drop "Front End Development React" from the header (it undersells).
 - Every bullet keeps the pattern: *verb → system → mechanism → measured outcome.* You already do this well.
 - Add one line under the summary: "Portfolio with architecture case studies: muthu.dev" — the site is the proof the resume can't fit.
 - Fix the typo "Shaden UI" → "Shadcn UI" in your resume.

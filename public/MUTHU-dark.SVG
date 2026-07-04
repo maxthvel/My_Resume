@@ -1,0 +1,17 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="mv" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4DA3FF"/>
+      <stop offset="100%" stop-color="#A78BFA"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="480" height="480" rx="112" fill="#0A0A0B"/>
+  <rect x="16" y="16" width="480" height="480" rx="112" fill="none" stroke="#26262B" stroke-width="4"/>
+  <!-- outer strokes of M -->
+  <path d="M 148 356 L 148 156" stroke="#F2F2F3" stroke-width="44" stroke-linecap="round" fill="none"/>
+  <path d="M 364 356 L 364 156" stroke="#F2F2F3" stroke-width="44" stroke-linecap="round" fill="none"/>
+  <!-- inner V (the "V" of Muthu V) in gradient -->
+  <path d="M 148 156 L 256 300 L 364 156" stroke="url(#mv)" stroke-width="44" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- cursor dot: the builder's caret -->
+  <circle cx="256" cy="368" r="22" fill="url(#mv)"/>
+</svg>

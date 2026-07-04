@@ -6,19 +6,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "hsl(240 6% 4%)",
-        surface: "hsl(240 5% 7%)",
-        "surface-hover": "hsl(240 5% 10%)",
-        border: "hsl(240 5% 14%)",
-        "border-strong": "hsl(240 5% 22%)",
-        foreground: "hsl(0 0% 95%)",
-        muted: "hsl(240 4% 62%)",
-        subtle: "hsl(240 4% 42%)",
+        background: "hsl(var(--background) / <alpha-value>)",
+        surface: "hsl(var(--surface) / <alpha-value>)",
+        "surface-hover": "hsl(var(--surface-hover) / <alpha-value>)",
+        border: "hsl(var(--border) / <alpha-value>)",
+        "border-strong": "hsl(var(--border-strong) / <alpha-value>)",
+        foreground: "hsl(var(--foreground) / <alpha-value>)",
+        muted: "hsl(var(--muted) / <alpha-value>)",
+        subtle: "hsl(var(--subtle) / <alpha-value>)",
         accent: {
-          DEFAULT: "hsl(210 100% 66%)",
-          violet: "hsl(258 90% 70%)",
-          emerald: "hsl(160 84% 45%)",
-          amber: "hsl(38 92% 55%)"
+          DEFAULT: "hsl(var(--accent) / <alpha-value>)",
+          violet: "hsl(var(--accent-violet) / <alpha-value>)",
+          emerald: "hsl(var(--accent-emerald) / <alpha-value>)",
+          amber: "hsl(var(--accent-amber) / <alpha-value>)"
         }
       },
       fontFamily: {
