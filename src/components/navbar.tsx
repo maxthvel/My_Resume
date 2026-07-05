@@ -21,9 +21,12 @@ export function Navbar({ onOpenPalette }: { onOpenPalette: () => void }) {
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-border/60 bg-background/70 backdrop-blur-xl">
       <nav className="mx-auto flex h-20 max-w-6xl items-center justify-between px-5 md:px-8" aria-label="Main">
-          <Link href="/" className="flex items-center gap-2 font-mono text-sm font-semibold tracking-tight">
-            <img src="/MUTHU-along-with-title.SVG" alt="Muthu" className="h-16 w-auto" />
-          </Link>
+        <Link href="/" className="flex items-center gap-2 font-mono text-sm font-semibold tracking-tight">
+          {/* light theme */}
+          <img src="/MUTHU-along-with-name-light-theme.svg" alt="Muthu" className="h-16 w-auto dark:hidden" />
+          {/* dark theme */}
+          <img src="/MUTHU-along-with-title.SVG" alt="Muthu" className="hidden h-16 w-auto dark:block" />
+        </Link>
 
         <div className="hidden items-center gap-1 md:flex">
           {links.map((l) => (
