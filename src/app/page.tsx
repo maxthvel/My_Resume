@@ -6,6 +6,7 @@ import { Timeline } from "@/components/sections/timeline";
 import { BlogPreview } from "@/components/sections/blog-preview";
 import { Contact } from "@/components/sections/contact";
 import { getAllPosts } from "@/lib/blog";
+import { Freelance } from "@/components/sections/freelance";
 
 export default function HomePage() {
   const posts = getAllPosts();
@@ -13,6 +14,7 @@ export default function HomePage() {
     <>
       <Hero />
       <FeaturedProjects />
+      <Freelance />
       <Expertise />
       <AiLabPreview />
       <Timeline />

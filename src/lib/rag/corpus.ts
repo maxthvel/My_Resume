@@ -6,6 +6,7 @@ import { expertise } from "@/lib/data/expertise";
 import { experiments } from "@/lib/data/ai-lab";
 import { timeline } from "@/lib/data/timeline";
 import { site } from "@/lib/data/site";
+import { freelance } from "@/lib/data/freelance";
 
 export type Chunk = {
   id: string;
@@ -46,6 +47,10 @@ export function getCorpus(): Chunk[] {
 
   for (const e of expertise) {
     add(`exp:${e.id}`, `Expertise — ${e.title}: ${e.summary} Evidence: ${e.points.join("; ")}.`, `Expertise · ${e.title}`, "/#expertise");
+  }
+
+  for (const f of freelance) {
+    add(`fl:${f.title}`, `Freelance — ${f.title} for ${f.client} (${f.url}): ${f.description} ${f.highlights.join(" ")} Stack: ${f.stack.join(", ")}.`, `Freelance · ${f.title}`, "/#freelance");
   }
 
   for (const x of experiments) {
