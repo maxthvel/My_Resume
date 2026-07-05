@@ -25,16 +25,19 @@ export async function GET() {
       created_at: string;
     }>;
 
-    const items = events.slice(0, 6).map((e) => ({
-      type: e.type,
-      repo: e.repo.name,
-      message:
-        e.payload.commits?.[0]?.message?.split("\n")[0] ??
-        e.payload.pull_request?.title ??
-        e.payload.action ??
-        e.type.replace("Event", ""),
-      date: e.created_at,
-    }));
+    const items = events
+      .filter((e) => e.repo.name.toLowerCase().startsWith(`${site.githubUser.toLowerCase()}/`))
+      .slice(0, 6)
+      .map((e) => ({
+        type: e.type,
+        repo: e.repo.name,
+        message:
+          e.payload.commits?.[0]?.message?.split("\n")[0] ??
+          e.payload.pull_request?.title ??
+          e.payload.action ??
+          e.type.replace("Event", ""),
+        date: e.created_at,
+      }));
 
     return NextResponse.json({ items });
   } catch {

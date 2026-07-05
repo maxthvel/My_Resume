@@ -26,8 +26,7 @@ const config: Config = {
         mono: ["var(--font-mono)", "monospace"]
       },
       fontSize: {
-        "display-lg": ["clamp(2.75rem, 6vw, 4.5rem)", { lineHeight: "1.05", letterSpacing: "-0.03em" }],
-        display: ["clamp(2rem, 4.5vw, 3rem)", { lineHeight: "1.1", letterSpacing: "-0.025em" }],
+        "display-lg": ["clamp(2rem, 4.5vw, 3.25rem)", { lineHeight: "1.1", letterSpacing: "-0.025em" }], display: ["clamp(2rem, 4.5vw, 3rem)", { lineHeight: "1.1", letterSpacing: "-0.025em" }],
         title: ["clamp(1.375rem, 2.5vw, 1.75rem)", { lineHeight: "1.25", letterSpacing: "-0.02em" }]
       },
       animation: {
