@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@langchain/langgraph": "^0.2.74",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.4",
     "framer-motion": "^12.4.7",
