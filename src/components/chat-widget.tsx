@@ -37,8 +37,47 @@ export function ChatWidget() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: next }),
       });
-      const data = await res.json();
-      setMessages([...next, { role: "assistant", content: data.reply ?? data.error ?? "Something went wrong.", sources: data.sources }]);
+
+      // Validation/server errors still come back as plain JSON — only successful
+      // requests are streamed NDJSON.
+      if (!res.ok || !res.body) {
+        const data = await res.json().catch(() => ({}));
+        setMessages([...next, { role: "assistant", content: data.error ?? "Something went wrong." }]);
+        return;
+      }
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+      let content = "";
+      let sources: Source[] | undefined;
+      let started = false;
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split("\n");
+        buffer = lines.pop() ?? "";
+        for (const line of lines) {
+          if (!line.trim()) continue;
+          const event = JSON.parse(line) as { type: "token"; text: string } | { type: "sources"; sources: Source[] };
+          if (event.type === "token") {
+            content += event.text;
+            if (!started) {
+              started = true;
+              setLoading(false);
+            }
+          } else {
+            sources = event.sources;
+          }
+          setMessages([...next, { role: "assistant", content, sources }]);
+        }
+      }
+
+      if (!content) {
+        setMessages([...next, { role: "assistant", content: "Hmm, no response — try again." }]);
+      }
     } catch {
       setMessages([...next, { role: "assistant", content: "Network hiccup — try again in a moment." }]);
     } finally {
